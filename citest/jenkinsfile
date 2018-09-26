@@ -10,7 +10,7 @@ pipeline {
         }
       }
       steps {
-        sh 'cd citest; mvn clean install'
+        sh 'mvn -f citest/pom.xml clean install'
       }
     } 
   }
