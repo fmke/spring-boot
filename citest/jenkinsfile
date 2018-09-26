@@ -16,7 +16,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t registry/citest:latest citest'
+        sh 'docker build -t registry/citest:latest citest --rm'
       }    
     }
   }  
