@@ -10,7 +10,7 @@ pipeline {
         }
       }
       steps {
-        sh 'cd citst; mvn clean install'
+        sh 'cd citest; mvn clean install'
       }
     } 
   }
