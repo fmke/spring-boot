@@ -13,11 +13,11 @@ pipeline {
         sh 'mvn -f citest/pom.xml clean install'
       }
     } 
-  }
-  stage('Docker Build') {
+    stage('Docker Build') {
       agent any
       steps {
         sh 'docker build -t LRepo/citest:latest citest'
       }    
-  }
+    }
+  }  
 }
