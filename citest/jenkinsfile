@@ -3,11 +3,12 @@
 pipeline {  
   agent none	// force each stage to have an agent
 
-  environment {
+  //environment {
       // DOCKER_IMAGE_TAG = "my-app:build-${env.BUILD_ID}"
-  }
+  //}
 	
   stages {
+  
     stage('Maven Install') {
       agent {
         docker {
@@ -55,13 +56,14 @@ pipeline {
       steps {
         sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'        
       }
-    }
-    
-    post {
+    }   
+     
+  }
+  
+  post {
       always {
         junit 'citeset/target/surefire-reports/*.xml'
         junit 'citeset/target/failsafe-reports/*.xml'
       }
-   	}	 
-  }  
+   	}	  
 }
