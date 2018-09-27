@@ -62,8 +62,8 @@ pipeline {
   
   post {
       always {
-        junit 'citeset/target/surefire-reports/*.xml'
-        junit 'citeset/target/failsafe-reports/*.xml'
+        junit 'citest/target/surefire-reports/*.xml'
+        junit 'citest/target/failsafe-reports/*.xml'
       }
    	}	  
 }
