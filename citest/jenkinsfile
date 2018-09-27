@@ -1,7 +1,12 @@
 #!groovy
 
-pipeline {
-  agent none
+pipeline {  
+  agent none	# force each stage to have an agent
+
+  environment {
+      # DOCKER_IMAGE_TAG = "my-app:build-${env.BUILD_ID}"
+  }
+	
   stages {
     stage('Maven Install') {
       agent {
@@ -10,7 +15,7 @@ pipeline {
         }
       }
       steps {
-        sh 'mvn -f citest/pom.xml clean install'
+        sh 'mvn -f citest/pom.xml clean package -U'
       }
     } 
     stage('Docker Build') {
@@ -28,5 +33,35 @@ pipeline {
         //}
       }
     }
+	
+	stage('Docker Launch') {
+      agent any
+      steps {
+        sh 'docker run --name iTest -p 8080:8080 -d localhost:5000/citest:latest'        
+      }
+    }
+	  		
+	stage('Test'){
+        //when {
+        //    environment name: 'run_test_only', value: 'yes'
+        //}
+        steps{
+            sh 'cd citest && mvn verify' 	//use local maven 
+        }
+    }
+    
+    stage('Docker Teardown') {
+      agent any
+      steps {
+        sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'        
+      }
+    }
+    
+    post {
+      always {
+        junit 'citeset/target/surefire-reports/*.xml'
+        junit 'citeset/target/failsafe-reports/*.xml'
+      }
+   	}	 
   }  
 }
