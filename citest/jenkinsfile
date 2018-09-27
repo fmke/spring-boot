@@ -38,7 +38,7 @@ pipeline {
 	stage('Docker Launch') {
       agent any
       steps {
-        sh 'docker run --name iTest -p 8080:8080 -d localhost:5000/citest:latest'        
+        sh 'docker run --name iTest -p 8082:8080 -d localhost:5000/citest:latest'        
       }
     }
 	  		
