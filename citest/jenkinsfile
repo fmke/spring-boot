@@ -1,10 +1,10 @@
 #!groovy
 
 pipeline {  
-  agent none	# force each stage to have an agent
+  agent none	// force each stage to have an agent
 
   environment {
-      # DOCKER_IMAGE_TAG = "my-app:build-${env.BUILD_ID}"
+      // DOCKER_IMAGE_TAG = "my-app:build-${env.BUILD_ID}"
   }
 	
   stages {
