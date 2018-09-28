@@ -18,6 +18,12 @@ pipeline {
       steps {
         sh 'mvn -f citest/pom.xml clean package -U'
       }       
+	    
+	post {
+          always {
+            junit 'citest/target/surefire-reports/*.xml'
+          }    
+        }
     } 
     stage('Docker Build') {
       agent any
@@ -50,6 +56,11 @@ pipeline {
         steps{
             sh 'cd citest && mvn verify' 	//use local maven 
         }
+	post {
+          always {
+            junit 'citest/target/failsafe-reports/*.xml'         
+          }    
+        }
     }
     
     stage('Docker Teardown') {
@@ -59,14 +70,6 @@ pipeline {
       }
     }   		
 	  
-  }
-   
-	post {    
-		node{
-       always {
-        junit 'citest/target/surefire-reports/*.xml'
-        junit 'citest/target/failsafe-reports/*.xml'
-       }    
-		}		
-     }	  
+  }  
+		  
 }
