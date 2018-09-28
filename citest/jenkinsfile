@@ -55,7 +55,7 @@ pipeline {
         //    environment name: 'run_test_only', value: 'yes'
         //}
         steps{
-            sh 'cd citest && mvn verify' 	//use local maven 
+            sh 'mvn -f citest/pom.xml verify' 	//use local maven 
         }
 	//post {
         //  always {
