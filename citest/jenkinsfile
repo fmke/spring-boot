@@ -35,29 +35,6 @@ pipeline {
       }
     }
 	
-	stage('Docker Launch') {
-      agent any
-      steps {
-        sh 'docker run --name iTest -p 8082:8080 -d localhost:5000/citest:latest'        
-      }
-    }
-	  		
-	stage('Test'){
-	agent any
-        //when {
-        //    environment name: 'run_test_only', value: 'yes'
-        //}
-        steps{
-            sh 'cd citest && mvn verify' 	//use local maven 
-        }
-    }
-    
-    stage('Docker Teardown') {
-      agent any
-      steps {
-        sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'        
-      }
-    }   
      
   }
   
