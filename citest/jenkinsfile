@@ -18,6 +18,13 @@ pipeline {
       steps {
         sh 'mvn -f citest/pom.xml clean package -U'
       }
+    
+      post {    
+       always {
+        junit 'citest/target/surefire-reports/*.xml'
+        junit 'citest/target/failsafe-reports/*.xml'
+       }    
+     }	    
     } 
     stage('Docker Build') {
       agent any
@@ -58,15 +65,7 @@ pipeline {
         sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'        
       }
     }   		
-     
+	  
   }
-  
-  post {
-    node{	  
-      always {
-        junit 'citest/target/surefire-reports/*.xml'
-        junit 'citest/target/failsafe-reports/*.xml'
-      }
-    }
-   }	  
+   
 }
