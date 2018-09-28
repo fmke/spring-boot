@@ -64,12 +64,12 @@ pipeline {
        // }
     }
     
-    stage('Docker Teardown') {
-      agent any
-      steps {
+    //stage('Docker Teardown') {
+     // agent any
+     // steps {
         //sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'        
-      }
-    }   		
+     // }
+    //}   		
 	  
   }  
 		  
