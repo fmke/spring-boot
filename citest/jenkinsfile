@@ -57,11 +57,11 @@ pipeline {
         steps{
             sh 'cd citest && mvn verify' 	//use local maven 
         }
-	post {
-          always {
-            junit 'citest/target/failsafe-reports/*.xml'         
-          }    
-        }
+	//post {
+        //  always {
+         //   junit 'citest/target/failsafe-reports/*.xml'         
+         // }    
+       // }
     }
     
     stage('Docker Teardown') {
