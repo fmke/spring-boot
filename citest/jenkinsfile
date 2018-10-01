@@ -17,7 +17,7 @@ pipeline {
       //  }
       //}
       steps {
-        sh 'mvn -f citest/pom.xml clean package -U'
+        sh '/home/ec2-user/tools/apache-maven-3.5.4/bin/mvn -f citest/pom.xml clean package -U'
       }       
 	    
 	//post {
@@ -61,7 +61,7 @@ pipeline {
         //    environment name: 'run_test_only', value: 'yes'
         //}
         steps{
-            sh 'mvn -f citest/pom.xml verify' 	//use local maven 
+            sh '/home/ec2-user/tools/apache-maven-3.5.4/bin/mvn -f citest/pom.xml verify' 	//use local maven 
         }
 	//post {
         //  always {
