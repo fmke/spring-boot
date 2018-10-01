@@ -50,8 +50,8 @@ pipeline {
       }
     }
 	  		
-    stage('Test'){
-	agent any
+   // stage('Test'){
+	//agent any
 	//agent {
         //  docker {
         //    image 'maven:3.5.0'
@@ -68,9 +68,11 @@ pipeline {
          //   junit 'citest/target/failsafe-reports/*.xml'         
          // }    
        // }
-	build job: 'citest-it', wait: true
-    }
-    
+	
+    //}
+	  
+    build 'citest-it'
+	  
     //stage('Docker Teardown') {
      // agent any
      // steps {
