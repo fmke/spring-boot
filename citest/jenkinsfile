@@ -50,11 +50,12 @@ pipeline {
     }
 	  		
     stage('Test'){
-	agent {
-          docker {
-            image 'maven:3.5.0'
-          }
-        }
+	agent none
+	//agent {
+        //  docker {
+        //    image 'maven:3.5.0'
+        //  }
+        //}
         //when {
         //    environment name: 'run_test_only', value: 'yes'
         //}
