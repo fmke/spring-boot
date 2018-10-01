@@ -69,7 +69,7 @@ pipeline {
         //}
         steps{
         //    sh '/var/lib/maven/bin/mvn -f citest/pom.xml verify' 	//use local maven 
-		build job 'citest-it' quietPeriod:10
+		build job: 'citest-it', quietPeriod: 10
         }
 	//post {
         //  always {
