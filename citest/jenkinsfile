@@ -60,15 +60,15 @@ pipeline {
         //when {
         //    environment name: 'run_test_only', value: 'yes'
         //}
-        //steps{
+        steps{
         //    sh '/var/lib/maven/bin/mvn -f citest/pom.xml verify' 	//use local maven 
-        //}
+		build 'citest-it'
+        }
 	//post {
         //  always {
          //   junit 'citest/target/failsafe-reports/*.xml'         
          // }    
-       // }
-	build 'citest-it'	
+       // }	
     }
 	  
     //stage('Docker Teardown') {
