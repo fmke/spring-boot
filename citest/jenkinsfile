@@ -71,8 +71,6 @@ pipeline {
 	
     //}
 	  
-    build 'citest-it'
-	  
     //stage('Docker Teardown') {
      // agent any
      // steps {
@@ -81,5 +79,6 @@ pipeline {
     //}   		
 	  
   }  
-		  
+
+	build 'citest-it'
 }
