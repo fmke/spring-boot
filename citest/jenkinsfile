@@ -42,17 +42,23 @@ pipeline {
       }
     }
     
+	  
+    stage('Docker Teardown') {
+      agent any
+      try {
+        steps {
+          //sh 'exit 1'
+	    sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'
+        }
+      }catch (exc) {
+            echo 'nothing to stop: docker image iTest not running!'
+            //throw
+      }
+    }   		
+	  
     stage('Docker Launch') {
       agent any
       steps {
-	try {
-            //sh 'exit 1'
-	    sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'
-        }catch (exc) {
-            echo 'nothing to stop: docker image iTest not running!'
-            //throw
-        }
-	      
         sh 'docker run --name iTest -p 8082:8080 -d localhost:5000/citest:latest'        
       }
     }
@@ -76,15 +82,7 @@ pipeline {
          //   junit 'citest/target/failsafe-reports/*.xml'         
          // }    
        // }	
-    }
-	  
-    //stage('Docker Teardown') {
-     // agent any
-     // steps {
-        //sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'        
-     // }
-    //}   		
-	  
+    }	  	  
   }  
 	
 }
