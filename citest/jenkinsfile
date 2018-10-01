@@ -45,7 +45,14 @@ pipeline {
     stage('Docker Launch') {
       agent any
       steps {
-	sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'
+	try {
+            //sh 'exit 1'
+	    sh 'docker rm $(docker stop $(docker ps -a -q --filter name=iTest))'
+        }catch (exc) {
+            echo 'nothing to stop: docker image iTest not running!'
+            //throw
+        }
+	      
         sh 'docker run --name iTest -p 8082:8080 -d localhost:5000/citest:latest'        
       }
     }
@@ -62,7 +69,7 @@ pipeline {
         //}
         steps{
         //    sh '/var/lib/maven/bin/mvn -f citest/pom.xml verify' 	//use local maven 
-		build 'citest-it'
+		build job 'citest-it' quietPeriod:10
         }
 	//post {
         //  always {
