@@ -12,7 +12,7 @@ public class MsgControllerIT {
 	@Test
 	public void testSendMsg() {
 		ResponseEntity<String> response
-		  = restTemplate.getForEntity("http://localhost:8082/msg?msg=testSendMsg", String.class);
+		  = restTemplate.getForEntity("http://localhost:8082/citest/msg?msg=testSendMsg", String.class);
 		
 		assertThat(response.getBody()).isEqualTo("testSendMsg");
 	}
