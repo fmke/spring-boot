@@ -10,14 +10,17 @@ pipeline {
   stages {
   
     stage('Maven Install') {
-	agent any    
-      //agent {
-      //  docker {
-      //    image 'maven:3.5.0'
-      //  }
-      //}
+	//agent any    
+      agent {
+        docker {
+          //image 'maven:3.5.0'
+	  image 'maven:3-alpine'
+	  args '-v $HOME/.m2:/root/.m2'
+        }
+      }
       steps {
-        sh '/var/lib/maven/bin/mvn -f citest/pom.xml clean package -U'
+        //sh '/var/lib/maven/bin/mvn -f citest/pom.xml clean package -U'
+	      sh 'mvn -f citest/pom.xml clean package -U'
       }       
 	    
 	//post {
