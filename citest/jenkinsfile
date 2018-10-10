@@ -23,11 +23,11 @@ pipeline {
 	      sh 'mvn -f citest/pom.xml clean package -U'
       }       
 	    
-	//post {
-         // always {
-          //  junit 'citest/target/surefire-reports/*.xml'
-          //}    
-       // }
+	post {
+          always {
+            junit 'citest/target/surefire-reports/*.xml'
+          }    
+        }
     } 
     stage('Docker Build') {
       agent any
