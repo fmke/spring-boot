@@ -71,7 +71,7 @@ pipeline {
       }
     }
 	  		
-    stage('Test'){
+    stage('Integration Test'){
 	agent any
 	//agent {
         //  docker {
