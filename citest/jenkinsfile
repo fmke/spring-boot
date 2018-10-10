@@ -20,13 +20,13 @@ pipeline {
       }
       steps {
         //sh '/var/lib/maven/bin/mvn -f citest/pom.xml clean package -U'
-	      sh 'mvn -f citest/pom.xml clean package -U'
+	  sh 'mvn -f citest/pom.xml clean package -U'
+	  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '', reportFiles: 'index.html', reportName: 'HReport', reportTitles: ''])
       }       
 	    
 	post {
           always {
-            junit 'citest/target/surefire-reports/*.xml'
-	    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '', reportFiles: 'index.html', reportName: 'HReport', reportTitles: ''])
+            junit 'citest/target/surefire-reports/*.xml'	    
           }    
         }
     } 
