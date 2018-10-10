@@ -26,8 +26,7 @@ pipeline {
 	post {
           always {
             junit 'citest/target/surefire-reports/*.xml'
-	  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-
+	    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'jcoverage', reportFiles: 'index.html', reportName: 'HReport', reportTitles: ''])
           }    
         }
     } 
