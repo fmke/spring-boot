@@ -26,6 +26,8 @@ pipeline {
 	post {
           always {
             junit 'citest/target/surefire-reports/*.xml'
+	  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+
           }    
         }
     } 
@@ -85,11 +87,11 @@ pipeline {
         //    sh '/var/lib/maven/bin/mvn -f citest/pom.xml verify' 	//use local maven 
 		build job: 'citest-it', quietPeriod: 10
         }
-	post {
-          always {
-            junit 'citest-it/target/failsafe-reports/*.xml'         
-          }    
-        }	
+	//post {
+        //  always {
+            //junit 'citest-it/target/failsafe-reports/*.xml'         		  
+        //  }    
+        //}	
     }	  	  
   }  
 	
