@@ -15,7 +15,7 @@ pipeline {
         docker {
           image 'maven:3.5.0'
 	  //image 'maven:3-alpine'
-	  //args '-v $HOME/.m2:/root/.m2' //this will cache downloaded jars so it can be share by other stages
+	  //args '-v $HOME/.m2:/root/.m2' // mount volume -> will cache ~/.m2  between pipeline runs using the maven container
         }
       }
       steps {
