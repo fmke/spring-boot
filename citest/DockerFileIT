@@ -1,4 +1,4 @@
 FROM maven:3.5-jdk-8-alpine
 WORKDIR /app
-COPY target /app
+COPY . /app
 RUN mvn clean verify
