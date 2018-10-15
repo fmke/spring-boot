@@ -80,7 +80,7 @@ pipeline {
       steps {
         //sh 'docker run --name iTest --network host -p 8082:8080 -d localhost:5000/citest:latest' 
 	 sh '''
-	   docker run --name iTest -p 8082:8080 -d localhost:5000/citest:latest
+	   docker run --name iTest -p 8082:8082 -d localhost:5000/citest:latest
 	 '''
       }
     }
