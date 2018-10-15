@@ -1,4 +1,4 @@
 FROM maven:3.5-jdk-8-alpine
 WORKDIR /app
-COPY spring-boot/citest /app
+COPY citest /app
 RUN mvn clean verify
