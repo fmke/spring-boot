@@ -42,7 +42,10 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t localhost:5000/citest:latest citest --rm'
+        sh '''
+	docker build -t localhost:5000/citest:latest citest --rm
+	docker build -f citest/DockerFileIT -t localhost:5000/citestit:latest citestit --rm
+	'''
 	//sh 'docker build -t citest:latest citest --rm'
       }    
     }
