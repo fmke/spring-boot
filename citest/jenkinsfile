@@ -43,8 +43,7 @@ pipeline {
       agent any
       steps {
         sh '''
-	docker build -t localhost:5000/citest:latest citest --rm
-	docker build -f citest/DockerFileIT -t localhost:5000/citestit:latest citest --rm
+	docker build -t localhost:5000/citest:latest citest --rm	
 	'''
 	//sh 'docker build -t citest:latest citest --rm'
       }    
@@ -99,7 +98,8 @@ pipeline {
         //}
         steps{
         //    sh '/var/lib/maven/bin/mvn -f citest/pom.xml verify' 	//use local maven 
-		build job: 'citest-it', quietPeriod: 10
+		//build job: 'citest-it', quietPeriod: 10
+	   docker build -f citest/DockerFileIT -t localhost:5000/citestit:latest citest --rm		
         }
 	//post {
         //  always {
