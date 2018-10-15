@@ -78,8 +78,7 @@ pipeline {
       steps {
         //sh 'docker run --name iTest --network host -p 8082:8080 -d localhost:5000/citest:latest' 
 	 sh '''
-	   IT_HOST_IP=`ip -4 addr show scope global dev docker0 | grep inet | awk '{print $2}' | cut -d / -f 1`
-	   docker run --name iTest --add-host outsidehost:$IT_HOST_IP -d localhost:5000/citest:latest
+	   docker run --name iTest -d localhost:5000/citest:latest
 	 '''
 	  //sh 'docker run --name iTest -p 8082:8080 -d citest:latest'        
       }
