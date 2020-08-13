@@ -1,2 +1,4 @@
 mvn clean package -U
 docker build -t citest . --rm
+
+http://host:80/citest/msg?msg=hi
